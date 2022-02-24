@@ -1,0 +1,28 @@
+<h2>By Capital</h2>
+
+<hr>
+
+<div class="row">
+    <div class="col">
+        <app-countries-input
+            [searchType]="searchType"
+            (onEnter)="search( $event )"
+            (onDebounce)="suggestions( $event )"
+        ></app-countries-input>
+    </div>    
+</div>
+
+<hr>
+
+<div *ngIf="err" >
+    <div class="alert alert-danger">
+        We didn't find any country with the capital: {{ query }}
+    </div>
+</div>
+
+<div *ngIf="countries.length > 0" class="row">
+    <div class="col">
+        <app-countries-table [countries]="countries"></app-countries-table>
+    </div>
+</div>
+

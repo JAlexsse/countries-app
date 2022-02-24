@@ -1,0 +1,60 @@
+<div *ngIf="!country else countryView" 
+    class="alert alert-info">
+    Please wait...
+</div>
+
+<ng-template #countryView class="row">
+    <div class="col-12">
+        <h1>Country: {{ country.name.common }}</h1>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-4">
+            <h3>Flag</h3>
+            <img class="img-thumbnail" [src]="country.flags.svg">
+        </div>
+
+        <div class="col">
+            <h3>Information</h3>
+            <ul class="list-gorup">
+                <li class="list-group-item">
+                    <strong>Country code: </strong>{{ country.ccn3 | number }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Official name: </strong>{{ country.name.official }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Capital: </strong>{{ country.capital[0] }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Region: </strong>{{ country.region }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Subregion: </strong>{{ country.subregion }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Population: </strong>{{ country.population | number }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Area: </strong>{{ country.area | number }}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <h3>Translations</h3>
+        <div class="col">
+            <span
+                *ngFor="let translation of country.translations | keyvalue" 
+                class="badge bg-primary m-1">
+
+                {{ translation.value.official }}
+
+            </span>
+        </div>
+    </div>
+</ng-template>
+
+
