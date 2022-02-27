@@ -1,1 +1,30 @@
-<p>by-region works!</p>
+<h2>By Region</h2>
+
+<hr>
+
+<h5>Select the region...</h5>
+
+<div class="row">
+    <div class="col">
+        <button *ngFor="let region of regions"
+                [class]="getCssClass( region )"
+                (click)="activateRegion( region )">
+            {{ region | titlecase }}
+        </button>
+    </div>
+
+</div>
+
+<div *ngIf="err" >
+    <div class="alert alert-danger">
+        We had a problem making this query. Try again later. :(
+    </div>
+</div>
+
+<div *ngIf="activeRegion !== '' && !err" class="row">
+    <hr class="m-1">
+    <h5>Region: {{ activeRegion | titlecase }}</h5>
+    <div class="col">
+        <app-countries-table [countries]="countries"></app-countries-table>
+    </div>
+</div>

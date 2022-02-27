@@ -12,6 +12,8 @@ export class ByCountryComponent {
   query: string = '';
   err: boolean = false;
   countries: Country[] = [];
+  suggestedCountries: Country[] = [];
+  showSuggested: boolean = false;
   searchType: string = 'Search country by name...'
 
   constructor(
@@ -21,19 +23,19 @@ export class ByCountryComponent {
   search( query: string ) {
     this.err = false;
     this.query = query;
-    
+    this.showSuggested = false;
+
     this.countryService
       .searchCountry( this.query )
       .subscribe(
         {
           next: ( response ) => {
             this.countries = response;
-            console.log( response );
           },
           error: ( error ) => {
             this.err = true;
             this.countries = [];
-            console.log( error );
+            console.error( error );
           }
         }
       );
@@ -41,5 +43,20 @@ export class ByCountryComponent {
 
   suggestions( query:string ) {
     this.err = false;
+    this.showSuggested = true;
+    this.query = query;
+
+    this.countryService.searchCountry( query )
+      .subscribe( 
+        {
+          next: ( response ) => {
+            this.suggestedCountries = response.splice(0,5);
+          },
+          error: ( error ) => {
+            this.suggestedCountries = [];
+            console.error( error );
+          }
+        }
+      );
   }
 }

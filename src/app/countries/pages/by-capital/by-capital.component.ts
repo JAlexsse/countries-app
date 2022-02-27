@@ -27,12 +27,11 @@ export class ByCapitalComponent {
         {
           next: ( response ) => {
             this.countries = response;
-            console.log( response );
           },
           error: ( error ) => {
             this.err = true;
             this.countries = [];
-            console.log( error );
+            console.error( error );
           }
         }
       );

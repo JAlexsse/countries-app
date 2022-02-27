@@ -9,7 +9,23 @@
             (onEnter)="search( $event )"
             (onDebounce)="suggestions( $event )"
         ></app-countries-input>
-    </div>    
+
+        <ul *ngIf="showSuggested" class="list-group">
+            <li class="list-group-item list-group-item-action"
+                *ngFor="let country of suggestedCountries">
+                <a [routerLink]="['/country', country.ccn3]"
+                    class="nav-link">
+                    {{ country.name.common }}
+                </a>
+            </li>
+            <li class="list-group-item list-group-item-action" 
+                (click)="search( query )">
+                <a class="nav-link">
+                    Search "{{ query }}..."
+                </a>
+            </li>
+        </ul>
+    </div>
 </div>
 
 <hr>
